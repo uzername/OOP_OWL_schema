@@ -10,16 +10,18 @@
 
 
 <Ontology xmlns="http://www.w3.org/2002/07/owl#"
-     xml:base="http://www.semanticweb.org/ivan/ontologies/2013/10/untitled-ontology-23"
+     xml:base="http://github.com/uzername/OOP_OWL_schema/blob/master/Structural_OOP_model.owl"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     ontologyIRI="http://www.semanticweb.org/ivan/ontologies/2013/10/untitled-ontology-23">
-    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
-    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
-    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+     ontologyIRI="http://github.com/uzername/OOP_OWL_schema/blob/master/Structural_OOP_model.owl">
+    <Prefix name="" IRI="http://www.w3.org/2002/07/owl#"/>
     <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Prefix name="structural_oop_model" IRI="http://github.com/uzername/OOP_OWL_schema/blob/master/Structural_OOP_model#"/>
     <Annotation>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <Literal xml:lang="uk" datatypeIRI="&rdf;PlainLiteral">онтологія ООП, яка базується на роботі Pornpit Wongthongtham</Literal>
@@ -32,6 +34,258 @@
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">OWL model of structural ontology based on Pornpit Wongthongtham model.</Literal>
     </Annotation>
+    <Declaration>
+        <Class IRI="#ClassAggregation"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ClassAssociation"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ClassAttribute"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ClassComposition"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ClassDependency"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ClassGeneralization"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ClassOperation"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ClassOperationInpParam"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ClassOperationOutParam"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ClassOperationParameter"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ClassRelationship"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ClassStructure"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ClassType"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#DataType"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#EncapsulationKwd"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PrimitiveDataType"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#Class_Attribute"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#Class_Operation"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#Class_Attribute_Name"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#Class_Name"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#Class_Operation_Name"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#Constraint_Note"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#Dependency_Type"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#Related_Role_Name"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#Relating_Role_Name"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#ClassAggregation"/>
+        <Class IRI="#ClassStructure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ClassAssociation"/>
+        <Class IRI="#ClassStructure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ClassComposition"/>
+        <Class IRI="#ClassStructure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ClassDependency"/>
+        <Class IRI="#ClassRelationship"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ClassGeneralization"/>
+        <Class IRI="#ClassRelationship"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ClassOperationInpParam"/>
+        <Class IRI="#ClassOperationParameter"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ClassOperationOutParam"/>
+        <Class IRI="#ClassOperationParameter"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ClassStructure"/>
+        <Class IRI="#ClassRelationship"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ClassType"/>
+        <Class IRI="#DataType"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PrimitiveDataType"/>
+        <Class IRI="#DataType"/>
+    </SubClassOf>
+    <IrreflexiveObjectProperty>
+        <ObjectProperty IRI="#Class_Attribute"/>
+    </IrreflexiveObjectProperty>
+    <IrreflexiveObjectProperty>
+        <ObjectProperty IRI="#Class_Operation"/>
+    </IrreflexiveObjectProperty>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#Class_Attribute"/>
+        <Class IRI="#ClassType"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#Class_Operation"/>
+        <Class IRI="#ClassType"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#Class_Attribute"/>
+        <Class IRI="#ClassAttribute"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#Class_Operation"/>
+        <Class IRI="#ClassOperation"/>
+    </ObjectPropertyRange>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#Class_Attribute_Name"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#Class_Name"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#Class_Operation_Name"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#Constraint_Note"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#Dependency_Type"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#Related_Role_Name"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#Relating_Role_Name"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#Class_Attribute_Name"/>
+    </FunctionalDataProperty>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#Class_Name"/>
+    </FunctionalDataProperty>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#Class_Operation_Name"/>
+    </FunctionalDataProperty>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#Constraint_Note"/>
+    </FunctionalDataProperty>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#Dependency_Type"/>
+    </FunctionalDataProperty>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#Related_Role_Name"/>
+    </FunctionalDataProperty>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#Relating_Role_Name"/>
+    </FunctionalDataProperty>
+    <DataPropertyDomain>
+        <DataProperty IRI="#Class_Attribute_Name"/>
+        <Class IRI="#ClassAttribute"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#Class_Name"/>
+        <Class IRI="#ClassType"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#Class_Operation_Name"/>
+        <Class IRI="#ClassOperation"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#Constraint_Note"/>
+        <Class IRI="#ClassRelationship"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#Dependency_Type"/>
+        <Class IRI="#ClassDependency"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#Related_Role_Name"/>
+        <Class IRI="#ClassStructure"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#Relating_Role_Name"/>
+        <Class IRI="#ClassStructure"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#Class_Attribute_Name"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#Class_Name"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#Class_Operation_Name"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#Constraint_Note"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#Dependency_Type"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#Related_Role_Name"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#Relating_Role_Name"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#Related_Role_Name</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">used in ClassStructure</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#Relating_Role_Name</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">used in ClassStructure</Literal>
+    </AnnotationAssertion>
 </Ontology>
 
 
