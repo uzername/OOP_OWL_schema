@@ -21,7 +21,7 @@
     <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
     <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
     <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
-    <Prefix name="structural_oop_model" IRI="http://github.com/uzername/OOP_OWL_schema/blob/master/Structural_OOP_model#"/>
+    <Prefix name="oop_model" IRI="http://github.com/uzername/OOP_OWL_schema/blob/master/Structural_OOP_model.owl#"/>
     <Annotation>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <Literal xml:lang="uk" datatypeIRI="&rdf;PlainLiteral">онтологія ООП, яка базується на роботі Pornpit Wongthongtham</Literal>
@@ -89,6 +89,9 @@
         <ObjectProperty IRI="#Class_Operation"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="#Uses_Encapsulation"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="#Class_Attribute_Name"/>
     </Declaration>
     <Declaration>
@@ -109,6 +112,24 @@
     <Declaration>
         <DataProperty IRI="#Relating_Role_Name"/>
     </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#op1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#private"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#protected"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#public"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="#domain_comment"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="#technical_comment"/>
+    </Declaration>
     <SubClassOf>
         <Class IRI="#ClassAggregation"/>
         <Class IRI="#ClassStructure"/>
@@ -116,6 +137,24 @@
     <SubClassOf>
         <Class IRI="#ClassAssociation"/>
         <Class IRI="#ClassStructure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ClassAttribute"/>
+        <Class abbreviatedIRI="owl:Thing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ClassAttribute"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#Uses_Encapsulation"/>
+            <Class IRI="#EncapsulationKwd"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ClassAttribute"/>
+        <DataMinCardinality cardinality="1">
+            <DataProperty IRI="#Class_Attribute_Name"/>
+            <Datatype abbreviatedIRI="xsd:string"/>
+        </DataMinCardinality>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ClassComposition"/>
@@ -130,12 +169,31 @@
         <Class IRI="#ClassRelationship"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="#ClassOperation"/>
+        <Class abbreviatedIRI="owl:Thing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ClassOperation"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#Uses_Encapsulation"/>
+            <Class IRI="#EncapsulationKwd"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="#ClassOperationInpParam"/>
         <Class IRI="#ClassOperationParameter"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ClassOperationOutParam"/>
         <Class IRI="#ClassOperationParameter"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ClassOperationParameter"/>
+        <Class abbreviatedIRI="owl:Thing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ClassRelationship"/>
+        <Class abbreviatedIRI="owl:Thing"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ClassStructure"/>
@@ -146,9 +204,112 @@
         <Class IRI="#DataType"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="#DataType"/>
+        <Class abbreviatedIRI="owl:Thing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#EncapsulationKwd"/>
+        <Class abbreviatedIRI="owl:Thing"/>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="#PrimitiveDataType"/>
         <Class IRI="#DataType"/>
     </SubClassOf>
+    <DisjointClasses>
+        <Class IRI="#ClassAttribute"/>
+        <Class IRI="#ClassOperation"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#ClassAttribute"/>
+        <Class IRI="#ClassOperationParameter"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#ClassAttribute"/>
+        <Class IRI="#ClassRelationship"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#ClassAttribute"/>
+        <Class IRI="#DataType"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#ClassAttribute"/>
+        <Class IRI="#EncapsulationKwd"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#ClassDependency"/>
+        <Class IRI="#ClassGeneralization"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#ClassOperation"/>
+        <Class IRI="#ClassOperationParameter"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#ClassOperation"/>
+        <Class IRI="#ClassRelationship"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#ClassOperation"/>
+        <Class IRI="#DataType"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#ClassOperation"/>
+        <Class IRI="#EncapsulationKwd"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#ClassOperationInpParam"/>
+        <Class IRI="#ClassOperationOutParam"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#ClassOperationParameter"/>
+        <Class IRI="#ClassRelationship"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#ClassOperationParameter"/>
+        <Class IRI="#DataType"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#ClassOperationParameter"/>
+        <Class IRI="#EncapsulationKwd"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#ClassRelationship"/>
+        <Class IRI="#DataType"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#ClassRelationship"/>
+        <Class IRI="#EncapsulationKwd"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#ClassType"/>
+        <Class IRI="#PrimitiveDataType"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#DataType"/>
+        <Class IRI="#EncapsulationKwd"/>
+    </DisjointClasses>
+    <ClassAssertion>
+        <Class IRI="#ClassOperation"/>
+        <NamedIndividual IRI="#op1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#EncapsulationKwd"/>
+        <NamedIndividual IRI="#private"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#EncapsulationKwd"/>
+        <NamedIndividual IRI="#protected"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#EncapsulationKwd"/>
+        <NamedIndividual IRI="#public"/>
+    </ClassAssertion>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#Uses_Encapsulation"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#Uses_Encapsulation"/>
+    </FunctionalObjectProperty>
     <IrreflexiveObjectProperty>
         <ObjectProperty IRI="#Class_Attribute"/>
     </IrreflexiveObjectProperty>
@@ -162,6 +323,13 @@
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#Class_Operation"/>
         <Class IRI="#ClassType"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#Uses_Encapsulation"/>
+        <ObjectUnionOf>
+            <Class IRI="#ClassAttribute"/>
+            <Class IRI="#ClassOperation"/>
+        </ObjectUnionOf>
     </ObjectPropertyDomain>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#Class_Attribute"/>
@@ -170,6 +338,10 @@
     <ObjectPropertyRange>
         <ObjectProperty IRI="#Class_Operation"/>
         <Class IRI="#ClassOperation"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#Uses_Encapsulation"/>
+        <Class IRI="#EncapsulationKwd"/>
     </ObjectPropertyRange>
     <SubDataPropertyOf>
         <DataProperty IRI="#Class_Attribute_Name"/>
@@ -277,6 +449,16 @@
         <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
     <AnnotationAssertion>
+        <AnnotationProperty IRI="#technical_comment"/>
+        <IRI>#EncapsulationKwd</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">individuals are persistent for this ontology and other ontologies derived from this one. don&apos;t remove these individuals.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="#technical_comment"/>
+        <IRI>#PrimitiveDataType</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">individuals are persistent for this ontology and other ontologies derived from this one. don&apos;t remove these individuals.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>#Related_Role_Name</IRI>
         <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">used in ClassStructure</Literal>
@@ -286,6 +468,14 @@
         <IRI>#Relating_Role_Name</IRI>
         <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">used in ClassStructure</Literal>
     </AnnotationAssertion>
+    <SubAnnotationPropertyOf>
+        <AnnotationProperty IRI="#domain_comment"/>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+    </SubAnnotationPropertyOf>
+    <SubAnnotationPropertyOf>
+        <AnnotationProperty IRI="#technical_comment"/>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+    </SubAnnotationPropertyOf>
 </Ontology>
 
 
