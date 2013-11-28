@@ -113,9 +113,6 @@
         <DataProperty IRI="#Relating_Role_Name"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#op1"/>
-    </Declaration>
-    <Declaration>
         <NamedIndividual IRI="#private"/>
     </Declaration>
     <Declaration>
@@ -144,10 +141,10 @@
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ClassAttribute"/>
-        <ObjectSomeValuesFrom>
+        <ObjectExactCardinality cardinality="1">
             <ObjectProperty IRI="#Uses_Encapsulation"/>
             <Class IRI="#EncapsulationKwd"/>
-        </ObjectSomeValuesFrom>
+        </ObjectExactCardinality>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ClassAttribute"/>
@@ -173,13 +170,6 @@
         <Class abbreviatedIRI="owl:Thing"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#ClassOperation"/>
-        <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="#Uses_Encapsulation"/>
-            <Class IRI="#EncapsulationKwd"/>
-        </ObjectSomeValuesFrom>
-    </SubClassOf>
-    <SubClassOf>
         <Class IRI="#ClassOperationInpParam"/>
         <Class IRI="#ClassOperationParameter"/>
     </SubClassOf>
@@ -287,10 +277,6 @@
         <Class IRI="#DataType"/>
         <Class IRI="#EncapsulationKwd"/>
     </DisjointClasses>
-    <ClassAssertion>
-        <Class IRI="#ClassOperation"/>
-        <NamedIndividual IRI="#op1"/>
-    </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#EncapsulationKwd"/>
         <NamedIndividual IRI="#private"/>

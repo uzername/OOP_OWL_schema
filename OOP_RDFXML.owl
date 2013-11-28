@@ -1,0 +1,450 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY oop_model "http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.w3.org/2002/07/owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:oop_model="http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#">
+    <Ontology rdf:about="http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl">
+        <rdfs:comment xml:lang="en">OWL model of structural ontology based on Pornpit Wongthongtham model.</rdfs:comment>
+        <rdfs:comment xml:lang="ru">Модель онтологии ООП, на основании работ Pornpit Wongthongtham</rdfs:comment>
+        <rdfs:comment xml:lang="uk">онтологія ООП, яка базується на роботі Pornpit Wongthongtham</rdfs:comment>
+    </Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#domain_comment -->
+
+    <AnnotationProperty rdf:about="&oop_model;domain_comment">
+        <rdfs:subPropertyOf rdf:resource="&rdfs;comment"/>
+    </AnnotationProperty>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#technical_comment -->
+
+    <AnnotationProperty rdf:about="&oop_model;technical_comment">
+        <rdfs:subPropertyOf rdf:resource="&rdfs;comment"/>
+    </AnnotationProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#Class_Attribute -->
+
+    <ObjectProperty rdf:about="&oop_model;Class_Attribute">
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:range rdf:resource="&oop_model;ClassAttribute"/>
+        <rdfs:domain rdf:resource="&oop_model;ClassType"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#Class_Operation -->
+
+    <ObjectProperty rdf:about="&oop_model;Class_Operation">
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:range rdf:resource="&oop_model;ClassOperation"/>
+        <rdfs:domain rdf:resource="&oop_model;ClassType"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#Uses_Encapsulation -->
+
+    <ObjectProperty rdf:about="&oop_model;Uses_Encapsulation">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:range rdf:resource="&oop_model;EncapsulationKwd"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
+        <rdfs:domain>
+            <Class>
+                <unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&oop_model;ClassAttribute"/>
+                    <rdf:Description rdf:about="&oop_model;ClassOperation"/>
+                </unionOf>
+            </Class>
+        </rdfs:domain>
+    </ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#Class_Attribute_Name -->
+
+    <DatatypeProperty rdf:about="&oop_model;Class_Attribute_Name">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&oop_model;ClassAttribute"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#Class_Name -->
+
+    <DatatypeProperty rdf:about="&oop_model;Class_Name">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&oop_model;ClassType"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#Class_Operation_Name -->
+
+    <DatatypeProperty rdf:about="&oop_model;Class_Operation_Name">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&oop_model;ClassOperation"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#Constraint_Note -->
+
+    <DatatypeProperty rdf:about="&oop_model;Constraint_Note">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&oop_model;ClassRelationship"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#Dependency_Type -->
+
+    <DatatypeProperty rdf:about="&oop_model;Dependency_Type">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&oop_model;ClassDependency"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#Related_Role_Name -->
+
+    <DatatypeProperty rdf:about="&oop_model;Related_Role_Name">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">used in ClassStructure</rdfs:comment>
+        <rdfs:domain rdf:resource="&oop_model;ClassStructure"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#Relating_Role_Name -->
+
+    <DatatypeProperty rdf:about="&oop_model;Relating_Role_Name">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">used in ClassStructure</rdfs:comment>
+        <rdfs:domain rdf:resource="&oop_model;ClassStructure"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#ClassAggregation -->
+
+    <Class rdf:about="&oop_model;ClassAggregation">
+        <rdfs:subClassOf rdf:resource="&oop_model;ClassStructure"/>
+    </Class>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#ClassAssociation -->
+
+    <Class rdf:about="&oop_model;ClassAssociation">
+        <rdfs:subClassOf rdf:resource="&oop_model;ClassStructure"/>
+    </Class>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#ClassAttribute -->
+
+    <Class rdf:about="&oop_model;ClassAttribute">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&oop_model;Uses_Encapsulation"/>
+                <onClass rdf:resource="&oop_model;EncapsulationKwd"/>
+                <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&oop_model;Class_Attribute_Name"/>
+                <maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</maxQualifiedCardinality>
+                <onDataRange rdf:resource="&xsd;string"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <disjointWith rdf:resource="&oop_model;ClassOperation"/>
+        <disjointWith rdf:resource="&oop_model;ClassOperationParameter"/>
+        <disjointWith rdf:resource="&oop_model;ClassRelationship"/>
+        <disjointWith rdf:resource="&oop_model;DataType"/>
+        <disjointWith rdf:resource="&oop_model;EncapsulationKwd"/>
+    </Class>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#ClassComposition -->
+
+    <Class rdf:about="&oop_model;ClassComposition">
+        <rdfs:subClassOf rdf:resource="&oop_model;ClassStructure"/>
+    </Class>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#ClassDependency -->
+
+    <Class rdf:about="&oop_model;ClassDependency">
+        <rdfs:subClassOf rdf:resource="&oop_model;ClassRelationship"/>
+        <disjointWith rdf:resource="&oop_model;ClassGeneralization"/>
+    </Class>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#ClassGeneralization -->
+
+    <Class rdf:about="&oop_model;ClassGeneralization">
+        <rdfs:subClassOf rdf:resource="&oop_model;ClassRelationship"/>
+    </Class>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#ClassOperation -->
+
+    <Class rdf:about="&oop_model;ClassOperation">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&oop_model;Uses_Encapsulation"/>
+                <onClass rdf:resource="&oop_model;EncapsulationKwd"/>
+                <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&oop_model;Class_Operation_Name"/>
+                <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
+                <onDataRange rdf:resource="&xsd;string"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <disjointWith rdf:resource="&oop_model;ClassOperationParameter"/>
+        <disjointWith rdf:resource="&oop_model;ClassRelationship"/>
+        <disjointWith rdf:resource="&oop_model;DataType"/>
+        <disjointWith rdf:resource="&oop_model;EncapsulationKwd"/>
+    </Class>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#ClassOperationInpParam -->
+
+    <Class rdf:about="&oop_model;ClassOperationInpParam">
+        <rdfs:subClassOf rdf:resource="&oop_model;ClassOperationParameter"/>
+        <disjointWith rdf:resource="&oop_model;ClassOperationOutParam"/>
+    </Class>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#ClassOperationOutParam -->
+
+    <Class rdf:about="&oop_model;ClassOperationOutParam">
+        <rdfs:subClassOf rdf:resource="&oop_model;ClassOperationParameter"/>
+    </Class>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#ClassOperationParameter -->
+
+    <Class rdf:about="&oop_model;ClassOperationParameter">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+        <disjointWith rdf:resource="&oop_model;ClassRelationship"/>
+        <disjointWith rdf:resource="&oop_model;DataType"/>
+        <disjointWith rdf:resource="&oop_model;EncapsulationKwd"/>
+    </Class>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#ClassRelationship -->
+
+    <Class rdf:about="&oop_model;ClassRelationship">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+        <disjointWith rdf:resource="&oop_model;DataType"/>
+        <disjointWith rdf:resource="&oop_model;EncapsulationKwd"/>
+    </Class>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#ClassStructure -->
+
+    <Class rdf:about="&oop_model;ClassStructure">
+        <rdfs:subClassOf rdf:resource="&oop_model;ClassRelationship"/>
+    </Class>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#ClassType -->
+
+    <Class rdf:about="&oop_model;ClassType">
+        <rdfs:subClassOf rdf:resource="&oop_model;DataType"/>
+        <disjointWith rdf:resource="&oop_model;PrimitiveDataType"/>
+    </Class>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#DataType -->
+
+    <Class rdf:about="&oop_model;DataType">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+        <disjointWith rdf:resource="&oop_model;EncapsulationKwd"/>
+    </Class>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#EncapsulationKwd -->
+
+    <Class rdf:about="&oop_model;EncapsulationKwd">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+        <oop_model:technical_comment>individuals are persistent for this ontology and other ontologies derived from this one. don&apos;t remove these individuals.</oop_model:technical_comment>
+    </Class>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#PrimitiveDataType -->
+
+    <Class rdf:about="&oop_model;PrimitiveDataType">
+        <rdfs:subClassOf rdf:resource="&oop_model;DataType"/>
+        <oop_model:technical_comment>individuals are persistent for this ontology and other ontologies derived from this one. don&apos;t remove these individuals.</oop_model:technical_comment>
+    </Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#private -->
+
+    <NamedIndividual rdf:about="&oop_model;private">
+        <rdf:type rdf:resource="&oop_model;EncapsulationKwd"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#protected -->
+
+    <NamedIndividual rdf:about="&oop_model;protected">
+        <rdf:type rdf:resource="&oop_model;EncapsulationKwd"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#public -->
+
+    <NamedIndividual rdf:about="&oop_model;public">
+        <rdf:type rdf:resource="&oop_model;EncapsulationKwd"/>
+    </NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDifferent"/>
+        <distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="&oop_model;protected"/>
+            <rdf:Description rdf:about="&oop_model;public"/>
+        </distinctMembers>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDifferent"/>
+        <distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="&oop_model;private"/>
+            <rdf:Description rdf:about="&oop_model;public"/>
+        </distinctMembers>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDifferent"/>
+        <distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="&oop_model;private"/>
+            <rdf:Description rdf:about="&oop_model;protected"/>
+        </distinctMembers>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+
