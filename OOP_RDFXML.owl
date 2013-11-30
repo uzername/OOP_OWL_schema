@@ -121,6 +121,7 @@
     <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#Related_Object_Class_Component -->
 
     <ObjectProperty rdf:about="&oop_model;Related_Object_Class_Component">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
         <oop_model:technical_comment>Used in ClassRelationship</oop_model:technical_comment>
         <rdfs:domain rdf:resource="&oop_model;ClassRelationship"/>
         <rdfs:range rdf:resource="&oop_model;ClassType"/>
@@ -131,6 +132,7 @@
     <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#Relating_Object_Class_Component -->
 
     <ObjectProperty rdf:about="&oop_model;Relating_Object_Class_Component">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
         <oop_model:technical_comment>Used in ClassRelationship</oop_model:technical_comment>
         <rdfs:domain rdf:resource="&oop_model;ClassRelationship"/>
         <rdfs:range rdf:resource="&oop_model;ClassType"/>
@@ -334,16 +336,16 @@
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <Restriction>
-                <onProperty rdf:resource="&oop_model;Uses_Encapsulation"/>
-                <onClass rdf:resource="&oop_model;EncapsulationKwd"/>
+                <onProperty rdf:resource="&oop_model;Class_Attribute_Name"/>
                 <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
+                <onDataRange rdf:resource="&xsd;string"/>
             </Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <Restriction>
-                <onProperty rdf:resource="&oop_model;Class_Attribute_Name"/>
+                <onProperty rdf:resource="&oop_model;Uses_Encapsulation"/>
+                <onClass rdf:resource="&oop_model;EncapsulationKwd"/>
                 <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
-                <onDataRange rdf:resource="&xsd;string"/>
             </Restriction>
         </rdfs:subClassOf>
         <disjointWith rdf:resource="&oop_model;ClassOperation"/>
@@ -382,14 +384,14 @@
         <rdfs:subClassOf rdf:resource="&oop_model;ClassRelationship"/>
         <rdfs:subClassOf>
             <Restriction>
-                <onProperty rdf:resource="&oop_model;Relating_Object_Class_Component"/>
+                <onProperty rdf:resource="&oop_model;Related_Object_Class_Component"/>
                 <onClass rdf:resource="&oop_model;ClassType"/>
                 <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
             </Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <Restriction>
-                <onProperty rdf:resource="&oop_model;Related_Object_Class_Component"/>
+                <onProperty rdf:resource="&oop_model;Relating_Object_Class_Component"/>
                 <onClass rdf:resource="&oop_model;ClassType"/>
                 <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
             </Restriction>
@@ -405,15 +407,15 @@
         <rdfs:subClassOf rdf:resource="&owl;Thing"/>
         <rdfs:subClassOf>
             <Restriction>
-                <onProperty rdf:resource="&oop_model;HasOutParam"/>
-                <onClass rdf:resource="&oop_model;ClassOperationOutParam"/>
+                <onProperty rdf:resource="&oop_model;Class_Operation_Name"/>
                 <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
+                <onDataRange rdf:resource="&xsd;string"/>
             </Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <Restriction>
-                <onProperty rdf:resource="&oop_model;Uses_Encapsulation"/>
-                <onClass rdf:resource="&oop_model;EncapsulationKwd"/>
+                <onProperty rdf:resource="&oop_model;HasOutParam"/>
+                <onClass rdf:resource="&oop_model;ClassOperationOutParam"/>
                 <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
             </Restriction>
         </rdfs:subClassOf>
@@ -425,9 +427,9 @@
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <Restriction>
-                <onProperty rdf:resource="&oop_model;Class_Operation_Name"/>
+                <onProperty rdf:resource="&oop_model;Uses_Encapsulation"/>
+                <onClass rdf:resource="&oop_model;EncapsulationKwd"/>
                 <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
-                <onDataRange rdf:resource="&xsd;string"/>
             </Restriction>
         </rdfs:subClassOf>
         <disjointWith rdf:resource="&oop_model;ClassOperationParameter"/>
@@ -544,6 +546,7 @@
         </rdfs:subClassOf>
         <disjointWith rdf:resource="&oop_model;DataType"/>
         <disjointWith rdf:resource="&oop_model;EncapsulationKwd"/>
+        <oop_model:technical_comment xml:lang="en">there might be only two different classes involved into ClassRelationship. But at the same time there may be several individuals united in Container and involved into this relationship.</oop_model:technical_comment>
     </Class>
     
 
@@ -552,6 +555,20 @@
 
     <Class rdf:about="&oop_model;ClassStructure">
         <rdfs:subClassOf rdf:resource="&oop_model;ClassRelationship"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&oop_model;Related_Role_Name"/>
+                <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
+                <onDataRange rdf:resource="&xsd;string"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&oop_model;Relating_Role_Name"/>
+                <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
+                <onDataRange rdf:resource="&xsd;string"/>
+            </Restriction>
+        </rdfs:subClassOf>
     </Class>
     
 
@@ -726,14 +743,14 @@
         <rdf:type rdf:resource="&owl;AllDifferent"/>
         <distinctMembers rdf:parseType="Collection">
             <rdf:Description rdf:about="&oop_model;private"/>
-            <rdf:Description rdf:about="&oop_model;protected"/>
+            <rdf:Description rdf:about="&oop_model;public"/>
         </distinctMembers>
     </rdf:Description>
     <rdf:Description>
         <rdf:type rdf:resource="&owl;AllDifferent"/>
         <distinctMembers rdf:parseType="Collection">
             <rdf:Description rdf:about="&oop_model;private"/>
-            <rdf:Description rdf:about="&oop_model;public"/>
+            <rdf:Description rdf:about="&oop_model;protected"/>
         </distinctMembers>
     </rdf:Description>
     <rdf:Description>
