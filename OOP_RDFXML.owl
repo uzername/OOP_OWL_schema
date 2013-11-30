@@ -63,6 +63,16 @@
     
 
 
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#Associated_Object_Class -->
+
+    <ObjectProperty rdf:about="&oop_model;Associated_Object_Class">
+        <oop_model:technical_comment xml:lang="en">Used in ClassAssociation</oop_model:technical_comment>
+        <rdfs:domain rdf:resource="&oop_model;ClassAssociation"/>
+        <rdfs:range rdf:resource="&oop_model;ClassType"/>
+    </ObjectProperty>
+    
+
+
     <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#Class_Attribute -->
 
     <ObjectProperty rdf:about="&oop_model;Class_Attribute">
@@ -108,6 +118,26 @@
     
 
 
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#Related_Object_Class_Component -->
+
+    <ObjectProperty rdf:about="&oop_model;Related_Object_Class_Component">
+        <oop_model:technical_comment>Used in ClassRelationship</oop_model:technical_comment>
+        <rdfs:domain rdf:resource="&oop_model;ClassRelationship"/>
+        <rdfs:range rdf:resource="&oop_model;ClassType"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#Relating_Object_Class_Component -->
+
+    <ObjectProperty rdf:about="&oop_model;Relating_Object_Class_Component">
+        <oop_model:technical_comment>Used in ClassRelationship</oop_model:technical_comment>
+        <rdfs:domain rdf:resource="&oop_model;ClassRelationship"/>
+        <rdfs:range rdf:resource="&oop_model;ClassType"/>
+    </ObjectProperty>
+    
+
+
     <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#UsesDataType -->
 
     <ObjectProperty rdf:about="&oop_model;UsesDataType">
@@ -116,6 +146,7 @@
         <rdfs:domain>
             <Class>
                 <unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&oop_model;ClassAttribute"/>
                     <rdf:Description rdf:about="&oop_model;ClassOperation"/>
                     <rdf:Description rdf:about="&oop_model;ClassOperationInpParam"/>
                     <rdf:Description rdf:about="&oop_model;ClassOperationOutParam"/>
@@ -153,6 +184,16 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#ClassOpStaticDecl -->
+
+    <DatatypeProperty rdf:about="&oop_model;ClassOpStaticDecl">
+        <oop_model:technical_comment>Class operation (method) may be declared as static</oop_model:technical_comment>
+        <rdfs:domain rdf:resource="&oop_model;ClassOperation"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </DatatypeProperty>
     
 
 
@@ -258,7 +299,25 @@
 
     <Class rdf:about="&oop_model;ClassAssociation">
         <rdfs:subClassOf rdf:resource="&oop_model;ClassStructure"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&oop_model;Associated_Object_Class"/>
+                <allValuesFrom rdf:resource="&oop_model;ClassType"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <oop_model:domain_comment xml:lang="en">ClassAssociation may utilize another class to express some parameters of association.</oop_model:domain_comment>
     </Class>
+    <Axiom>
+        <oop_model:technical_comment xml:lang="en">Only a single class is used for association. Anyway, we don&apos;t need to define it directly in  UML class diagram.</oop_model:technical_comment>
+        <annotatedSource rdf:resource="&oop_model;ClassAssociation"/>
+        <annotatedProperty rdf:resource="&rdfs;subClassOf"/>
+        <annotatedTarget>
+            <Restriction>
+                <onProperty rdf:resource="&oop_model;Associated_Object_Class"/>
+                <allValuesFrom rdf:resource="&oop_model;ClassType"/>
+            </Restriction>
+        </annotatedTarget>
+    </Axiom>
     
 
 
@@ -266,6 +325,13 @@
 
     <Class rdf:about="&oop_model;ClassAttribute">
         <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&oop_model;UsesDataType"/>
+                <onClass rdf:resource="&oop_model;PrimitiveDataType"/>
+                <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
+            </Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <Restriction>
                 <onProperty rdf:resource="&oop_model;Uses_Encapsulation"/>
@@ -276,7 +342,7 @@
         <rdfs:subClassOf>
             <Restriction>
                 <onProperty rdf:resource="&oop_model;Class_Attribute_Name"/>
-                <maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</maxQualifiedCardinality>
+                <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
                 <onDataRange rdf:resource="&xsd;string"/>
             </Restriction>
         </rdfs:subClassOf>
@@ -285,6 +351,9 @@
         <disjointWith rdf:resource="&oop_model;ClassRelationship"/>
         <disjointWith rdf:resource="&oop_model;DataType"/>
         <disjointWith rdf:resource="&oop_model;EncapsulationKwd"/>
+        <oop_model:technical_comment xml:lang="en">ClassAttribute defines EXPLICITLY only attributes which have primitive data type. If class has ClassType attribute, it means that one of ClassStructure relationships was used. In this case we may IMPLICITLY find out ClassAttribute.</oop_model:technical_comment>
+        <oop_model:technical_comment xml:lang="en">Using in ClassAttribute UsesDataType adds possible threat to ontology consistency</oop_model:technical_comment>
+        <oop_model:technical_comment xml:lang="ru">ClassAttribute В ЯВНОМ ВИДЕ используется для определений атрибутов с примитивным типом данных. В модели Порнпит Вонгтхонтхам этому не приделяется внимания вообще. Если у класа есть атрибут, который также является экземпляром класса, то это значит, что использовался один из связей ClassStructure.</oop_model:technical_comment>
     </Class>
     
 
@@ -302,6 +371,7 @@
     <Class rdf:about="&oop_model;ClassDependency">
         <rdfs:subClassOf rdf:resource="&oop_model;ClassRelationship"/>
         <disjointWith rdf:resource="&oop_model;ClassGeneralization"/>
+        <oop_model:technical_comment xml:lang="en">Dependency is very special case of Relationship...</oop_model:technical_comment>
     </Class>
     
 
@@ -310,6 +380,21 @@
 
     <Class rdf:about="&oop_model;ClassGeneralization">
         <rdfs:subClassOf rdf:resource="&oop_model;ClassRelationship"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&oop_model;Relating_Object_Class_Component"/>
+                <onClass rdf:resource="&oop_model;ClassType"/>
+                <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&oop_model;Related_Object_Class_Component"/>
+                <onClass rdf:resource="&oop_model;ClassType"/>
+                <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
+            </Restriction>
+        </rdfs:subClassOf>
+        <oop_model:technical_comment xml:lang="en">Multiple inheritance/Generalization is not used here.</oop_model:technical_comment>
     </Class>
     
 
@@ -320,9 +405,22 @@
         <rdfs:subClassOf rdf:resource="&owl;Thing"/>
         <rdfs:subClassOf>
             <Restriction>
+                <onProperty rdf:resource="&oop_model;HasOutParam"/>
+                <onClass rdf:resource="&oop_model;ClassOperationOutParam"/>
+                <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
                 <onProperty rdf:resource="&oop_model;Uses_Encapsulation"/>
                 <onClass rdf:resource="&oop_model;EncapsulationKwd"/>
                 <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&oop_model;HasInpParam"/>
+                <someValuesFrom rdf:resource="&oop_model;ClassOperationInpParam"/>
             </Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -343,15 +441,6 @@
     <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#ClassOperationInpParam -->
 
     <Class rdf:about="&oop_model;ClassOperationInpParam">
-        <rdfs:subClassOf rdf:resource="&oop_model;ClassOperationParameter"/>
-        <disjointWith rdf:resource="&oop_model;ClassOperationOutParam"/>
-    </Class>
-    
-
-
-    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#ClassOperationOutParam -->
-
-    <Class rdf:about="&oop_model;ClassOperationOutParam">
         <rdfs:subClassOf rdf:resource="&oop_model;ClassOperationParameter"/>
         <rdfs:subClassOf>
             <Class>
@@ -382,6 +471,46 @@
                 </intersectionOf>
             </Class>
         </rdfs:subClassOf>
+        <disjointWith rdf:resource="&oop_model;ClassOperationOutParam"/>
+    </Class>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#ClassOperationOutParam -->
+
+    <Class rdf:about="&oop_model;ClassOperationOutParam">
+        <rdfs:subClassOf rdf:resource="&oop_model;ClassOperationParameter"/>
+        <rdfs:subClassOf>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <Restriction>
+                        <onProperty rdf:resource="&oop_model;UsesDataType"/>
+                        <allValuesFrom>
+                            <Class>
+                                <unionOf rdf:parseType="Collection">
+                                    <rdf:Description rdf:about="&oop_model;ClassType"/>
+                                    <rdf:Description rdf:about="&oop_model;PrimitiveDataType"/>
+                                    <rdf:Description rdf:about="&oop_model;VoidType"/>
+                                </unionOf>
+                            </Class>
+                        </allValuesFrom>
+                    </Restriction>
+                    <Restriction>
+                        <onProperty rdf:resource="&oop_model;UsesDataType"/>
+                        <onClass>
+                            <Class>
+                                <unionOf rdf:parseType="Collection">
+                                    <rdf:Description rdf:about="&oop_model;ClassType"/>
+                                    <rdf:Description rdf:about="&oop_model;PrimitiveDataType"/>
+                                    <rdf:Description rdf:about="&oop_model;VoidType"/>
+                                </unionOf>
+                            </Class>
+                        </onClass>
+                        <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </rdfs:subClassOf>
     </Class>
     
 
@@ -401,6 +530,18 @@
 
     <Class rdf:about="&oop_model;ClassRelationship">
         <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&oop_model;Relating_Object_Class_Component"/>
+                <allValuesFrom rdf:resource="&oop_model;ClassType"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&oop_model;Related_Object_Class_Component"/>
+                <allValuesFrom rdf:resource="&oop_model;ClassType"/>
+            </Restriction>
+        </rdfs:subClassOf>
         <disjointWith rdf:resource="&oop_model;DataType"/>
         <disjointWith rdf:resource="&oop_model;EncapsulationKwd"/>
     </Class>
@@ -419,18 +560,6 @@
 
     <Class rdf:about="&oop_model;ClassType">
         <rdfs:subClassOf rdf:resource="&oop_model;DataType"/>
-        <rdfs:subClassOf>
-            <Restriction>
-                <onProperty rdf:resource="&oop_model;Class_Operation"/>
-                <someValuesFrom rdf:resource="&oop_model;ClassOperation"/>
-            </Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <Restriction>
-                <onProperty rdf:resource="&oop_model;Class_Attribute"/>
-                <someValuesFrom rdf:resource="&oop_model;ClassAttribute"/>
-            </Restriction>
-        </rdfs:subClassOf>
         <disjointWith rdf:resource="&oop_model;PrimitiveDataType"/>
     </Class>
     
@@ -463,6 +592,15 @@
     
 
 
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#VoidType -->
+
+    <Class rdf:about="&oop_model;VoidType">
+        <rdfs:subClassOf rdf:resource="&oop_model;DataType"/>
+        <oop_model:technical_comment>Individual of this class is persistent.</oop_model:technical_comment>
+    </Class>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -474,44 +612,42 @@
     
 
 
-    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#attr -->
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#cls1 -->
 
-    <NamedIndividual rdf:about="&oop_model;attr">
-        <rdf:type rdf:resource="&oop_model;ClassAttribute"/>
-    </NamedIndividual>
-    
-
-
-    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#cl_opr -->
-
-    <NamedIndividual rdf:about="&oop_model;cl_opr">
-        <rdf:type rdf:resource="&oop_model;ClassOperation"/>
-        <oop_model:Uses_Encapsulation rdf:resource="&oop_model;private"/>
-    </NamedIndividual>
-    
-
-
-    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#cl_opr_out -->
-
-    <NamedIndividual rdf:about="&oop_model;cl_opr_out">
-        <rdf:type rdf:resource="&oop_model;ClassOperationOutParam"/>
-    </NamedIndividual>
-    
-
-
-    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#dummyclass -->
-
-    <NamedIndividual rdf:about="&oop_model;dummyclass">
+    <NamedIndividual rdf:about="&oop_model;cls1">
         <rdf:type rdf:resource="&oop_model;ClassType"/>
     </NamedIndividual>
     
 
 
-    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#dummyclass2 -->
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#cls2 -->
 
-    <NamedIndividual rdf:about="&oop_model;dummyclass2">
+    <NamedIndividual rdf:about="&oop_model;cls2">
         <rdf:type rdf:resource="&oop_model;ClassType"/>
-        <oop_model:Class_Operation rdf:resource="&oop_model;cl_opr"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#cls3 -->
+
+    <NamedIndividual rdf:about="&oop_model;cls3">
+        <rdf:type rdf:resource="&oop_model;ClassType"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#cls4 -->
+
+    <NamedIndividual rdf:about="&oop_model;cls4">
+        <rdf:type rdf:resource="&oop_model;ClassType"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#cls5 -->
+
+    <NamedIndividual rdf:about="&oop_model;cls5">
+        <rdf:type rdf:resource="&oop_model;ClassType"/>
     </NamedIndividual>
     
 
@@ -528,15 +664,6 @@
 
     <NamedIndividual rdf:about="&oop_model;integer">
         <rdf:type rdf:resource="&oop_model;PrimitiveDataType"/>
-    </NamedIndividual>
-    
-
-
-    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#outparm -->
-
-    <NamedIndividual rdf:about="&oop_model;outparm">
-        <rdf:type rdf:resource="&oop_model;ClassOperationOutParam"/>
-        <oop_model:UsesDataType rdf:resource="&oop_model;dummyclass"/>
     </NamedIndividual>
     
 
@@ -565,6 +692,28 @@
     
 
 
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#rltns1 -->
+
+    <NamedIndividual rdf:about="&oop_model;rltns1">
+        <rdf:type rdf:resource="&oop_model;ClassRelationship"/>
+        <oop_model:Related_Object_Class_Component rdf:resource="&oop_model;cls1"/>
+        <oop_model:Related_Object_Class_Component rdf:resource="&oop_model;cls2"/>
+        <oop_model:Relating_Object_Class_Component rdf:resource="&oop_model;cls3"/>
+        <oop_model:Relating_Object_Class_Component rdf:resource="&oop_model;cls4"/>
+        <oop_model:Related_Object_Class_Component rdf:resource="&oop_model;cls5"/>
+        <oop_model:Relating_Object_Class_Component rdf:resource="&oop_model;cls5"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://github.com/uzername/OOP_OWL_schema/blob/master/OOP_RDFXML.owl#void -->
+
+    <NamedIndividual rdf:about="&oop_model;void">
+        <rdf:type rdf:resource="&oop_model;VoidType"/>
+    </NamedIndividual>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -576,8 +725,8 @@
     <rdf:Description>
         <rdf:type rdf:resource="&owl;AllDifferent"/>
         <distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="&oop_model;private"/>
             <rdf:Description rdf:about="&oop_model;protected"/>
-            <rdf:Description rdf:about="&oop_model;public"/>
         </distinctMembers>
     </rdf:Description>
     <rdf:Description>
@@ -590,8 +739,8 @@
     <rdf:Description>
         <rdf:type rdf:resource="&owl;AllDifferent"/>
         <distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="&oop_model;private"/>
             <rdf:Description rdf:about="&oop_model;protected"/>
+            <rdf:Description rdf:about="&oop_model;public"/>
         </distinctMembers>
     </rdf:Description>
 </rdf:RDF>
